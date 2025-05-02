@@ -4,7 +4,7 @@ module top_module (
     input w,
     output z);
     
-    parameter  A=3'b000,B=3'b001,C=3'b010,D=3'b011,E=3'b100,F=3'b101;
+    parameter  [2:0]A=3'b000,B=3'b001,C=3'b010,D=3'b011,E=3'b100,F=3'b101;
     reg[2:0]state,next_state;
     
     always@(posedge clk)begin
@@ -21,7 +21,7 @@ module top_module (
             D:next_state=(w==0)?F:A;
             E:next_state=(w==0)?E:D;
             F:next_state=(w==0)?C:D;
-            default:z=A;
+            default:next_state=A;
         endcase
     end
     assign z=(state==E | state==F);
